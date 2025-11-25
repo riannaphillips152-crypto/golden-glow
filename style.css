@@ -1,0 +1,83 @@
+/* Basic body styling to remove margins and hide overflow */
+body { 
+    margin: 0; 
+    padding: 0;
+    overflow: hidden; 
+    background-color: #FFF8E1; /* Matches palette1.bg */
+    font-family: sans-serif; /* Global font for text elements */
+}
+
+/* Ensure the canvas is a block element to avoid extra space below it */
+canvas { 
+    display: block; 
+}
+
+/* Styling for the emotion title overlay */
+#emotion-title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #d6b600; /* Darker gold text for visibility on light bg */
+    font-size: 28px; /* Slightly larger title */
+    z-index: 10; /* Ensures it's above the canvas */
+    font-weight: bold;
+    pointer-events: none; /* Let clicks pass through to canvas */
+}
+
+/* Styling for the interactive instructions textbox */
+#interaction-instructions {
+    position: absolute;
+    bottom: 20px;
+    right: 20px; /* Positioned at Bottom Right */
+    width: 200px; /* Reduced width */
+    padding: 10px; /* Reduced padding */
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
+    border-radius: 8px; /* Rounded corners */
+    color: #FFFFFF; /* White text for instructions */
+    font-size: 13px; /* Slightly smaller text */
+    line-height: 1.4; /* Good line spacing */
+    z-index: 10;
+    
+    /* Interactive properties */
+    cursor: pointer;
+    
+    /* Performance: Hint browser that height will change */
+    will-change: max-height;
+    
+    transition: max-height 0.3s ease, background-color 0.2s; /* Smooth slide animation */
+    overflow: hidden; /* Hides content when collapsed */
+    max-height: 300px; /* Max height for expanded state */
+}
+
+#interaction-instructions:hover {
+    background-color: rgba(0, 0, 0, 0.85); /* Slightly darker on hover */
+}
+
+/* Collapsed state styling - limits height to show only header */
+#interaction-instructions.collapsed {
+    max-height: 38px; /* Adjusted for the smaller header */
+}
+
+#instructions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.2); /* Subtle divider line */
+    padding-bottom: 5px;
+}
+
+#instructions-content p {
+    margin: 0 0 8px 0; /* Some spacing between paragraphs */
+}
+
+#instructions-content p:last-child {
+    margin-bottom: 0; /* No margin on the last paragraph */
+}
+
+#toggle-icon {
+    font-weight: bold;
+    font-size: 16px;
+}
