@@ -56,7 +56,6 @@ function draw() {
     joyInstance.draw();
     
     // --- DRAW VIDEO CAPTURE ---
-    // Check if capture is ready
     if (capture && capture.loadedmetadata) {
         let vidWidth = 230; // Same visual width as the text box (200px + padding)
         let vidHeight = (capture.height / capture.width) * vidWidth; // Maintain aspect ratio
@@ -68,7 +67,7 @@ function draw() {
         // Draw the video
         image(capture, x, y, vidWidth, vidHeight);
         
-        // Optional: Add a border to match the text box style
+        // can add a border to match the text box style
         noFill();
         stroke(255, 255, 255, 100);
         strokeWeight(1);
@@ -119,7 +118,7 @@ class Joy {
         this.bouncersSpawnRate = floor(map(mouseY, height, 0, 0, 2, true)); 
         this.currentBounciness = map(mouseX, 0, width, 0.5, 2.0, true); 
 
-        // Regular spawning
+        // normal spawning
         if (frameCount % 5 === 0) { 
             for (let i = 0; i < this.bouncersSpawnRate; i++) {
                 this.bouncers.push(new Bouncer(random(width), random(height), this.currentPalette.bouncerColors));
@@ -137,7 +136,7 @@ class Joy {
         }
 
         // --- CAP OPTIMIZATION ---
-        // Reduced cap to 100 for smoother performance
+        // Reduced cap to 100 for smoother performance- started to lag with vid capture
         if (this.bouncers.length > 100) {
             this.bouncers.splice(0, this.bouncers.length - 100);
         }
@@ -209,8 +208,6 @@ class Bouncer {
         let alphaValue = map(this.life, 0, 255, 0, alpha(this.color));
         fill(red(this.color), green(this.color), blue(this.color), alphaValue);
         noStroke();
-
-        // --- AGGRESSIVE OPTIMIZATION ---
         ellipse(this.x, this.y, this.radius * 2);
     }
 
